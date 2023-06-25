@@ -1,4 +1,5 @@
 import { req } from "../../axiosReqMethods";
+
 import {
   fetchStart,
   fetchFailed,
@@ -6,14 +7,15 @@ import {
   reserError,
 } from "../UseersComponentRedux";
 
+
+
 export const fetchUsers = async (dispatch) => {
   dispatch(fetchStart());
-  try {
+  try {  
     const users = await req.get("/api/users/allinfo");
-    dispatch(fetchSuccess(users.data));
-    console.log("is not error in login");
+    dispatch(fetchSuccess(users?.data));
   } catch (error) { 
-      dispatch(fetchFailed(error.response.data));
+      dispatch(fetchFailed(error.response?.data));
 
     setTimeout(() => {
       dispatch(reserError());
