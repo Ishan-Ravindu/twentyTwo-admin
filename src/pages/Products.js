@@ -6,6 +6,7 @@ import ProductsComp from '../components/ProductsComp'
 
 
 const Container = styled.div`
+
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -21,13 +22,17 @@ const Title = styled.h1`
     font-size: 1.25rem;
 `
 const FilterSection = styled.div`
-    width: 100%;
+    max-width: 100%;
     display: flex;
     padding: 1.5rem 1rem;
     background-color: white;
     box-sizing: border-box;
     gap: 0.5rem;
     border-radius: 1vmin;
+
+    @media (max-width: 650px) {
+        flex-direction: column;
+    }
 
     > * {
         background-color: #F4F5F7;
@@ -67,22 +72,16 @@ const AddProduct = styled.button`
 function Products() {
     const [products, setProducts] = useState([])
     const [querie, setquery] = useState()
-    const [url, setURL] = useState()
-    console.log(querie)
-    const handleS = async(e,{type}) => {     
-        // if(type === "cat") url += `&category=${e.target.value}`
-            // if(type === "sort") url += `&sort=${e.target.value}`
-            // if(type === "search") url += `&s=${e.target.value}`
 
-            if(type === "cat") setquery(p => ({...p, category : e.target.value}))
-            if(type === "sort") setquery(p => ({...p, sort : e.target.value}))
-            if(type === "search") setquery(p => ({...p, s : e.target.value})) 
+    const handleS = async(e,{type}) => {     
+        if(type === "cat") setquery(p => ({...p, category : e.target.value}))
+        if(type === "sort") setquery(p => ({...p, sort : e.target.value}))
+        if(type === "search") setquery(p => ({...p, s : e.target.value})) 
     }
 
     useEffect(() => {
         (async() => {
-            try {
-        
+            try {     
                 let url = `/api/products/allinfo?limit=100&${new URLSearchParams(querie)}`
                 const { data } = await req.get(url)
                 setProducts(data)
@@ -93,8 +92,9 @@ function Products() {
     },[querie])
   return (
     <Container>
+        <Title>Products</Title>
         <Wrapper>
-            <Title>Products</Title>
+            
             <FilterSection>
                 <SearchProduct placeholder='Search by product name' onChange={(e) => handleS(e, {type: "search"})}></SearchProduct>
                 <Sections onChange={(e) => handleS(e, {type: "cat"})}>

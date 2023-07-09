@@ -1,21 +1,19 @@
 import React from 'react'
-import { LineStyle, Timeline, TrendingUp, PermIdentity, Storefront, LocalAtm, Assessment, Drafts, Feedback, Forum, Work, Receipt, PieChart } from "@material-ui/icons";
+import { LineStyle, Timeline, TrendingUp, PermIdentity, Storefront, LocalAtm, Drafts, Feedback, Forum, PieChart } from "@material-ui/icons";
 import styled, { css } from "styled-components";
 import { Link} from 'react-router-dom';
 
 
 
 const SidebarContainer = styled.div`
-    flex: 1;
+    position: fixed; 
+    top: 50px;
+    bottom: 0;
+    left: ${props => props.isOpen ? "0%" : "-100%"};
     height: calc(100vh - 50px);
     background-color: rgb(251, 251, 255);
-    position: sticky;
-    top: 50px;
     width: max-content;
-
-    @media (max-width: 700px) {
-        display: none;
-    }
+    transition: all 0.3s ease-in-out ;
     
 `
 const SidebarWrapper = styled.div`
@@ -42,72 +40,34 @@ const SidebarListItem = styled.li`
     &:hover {
         background-color: rgb(240, 240, 255);
     }
-`
-const sharedStyle = css`
-    margin-right: 5px;
-    font-size: 20px !important;
-`
-const MyLineStyle = styled(LineStyle)`
-    ${sharedStyle}
-`
-const MyTimeline = styled(Timeline)`
-    ${sharedStyle}
-`
-const MyTrendingUp = styled(TrendingUp)`
-    ${sharedStyle}
-`
-const MyPermIdentity = styled(PermIdentity)`
-    ${sharedStyle}
-`
-const MyStorefront = styled(Storefront)`
-    ${sharedStyle}
-`
-const MyAssessment = styled(Assessment)`
-    ${sharedStyle}
-`
-const MyLocalAtm = styled(LocalAtm)`
-    ${sharedStyle}
-`
-const MyDrafts = styled(Drafts)`
-    ${sharedStyle}
-`
-const MyFeedback = styled(Feedback)`
-    ${sharedStyle}
-`
-const MyForum = styled(Forum)`
-    ${sharedStyle}
-`
-const MyWork = styled(Work)`
-    ${sharedStyle}
-`
-const MyPieChart = styled(PieChart)`
-    ${sharedStyle}
-`
-const MyReceipt = styled(Receipt)`
-    ${sharedStyle}
+
+    > svg {
+        margin-right: 5px;
+        font-size: 20px !important;
+    }
 `
 
-const SlideBar = () => {
-
+const SlideBar = (props) => {
+    
 
     return (
-        <SidebarContainer>
+        <SidebarContainer isOpen={props.isOpen}>
             <SidebarWrapper>
                 <SidebarMenu>
                     <SidebarTitle>Dashboard</SidebarTitle>
                     <SidebarList>
                   
                             <SidebarListItem>
-                                <MyLineStyle />
+                                <LineStyle />
                                 <Link to="/">Home</Link>
                             </SidebarListItem>
                   
                         <SidebarListItem>
-                            <MyTimeline />
+                            <PieChart />
                             Analytics
                         </SidebarListItem>
                         <SidebarListItem>
-                            <MyTrendingUp />
+                            <TrendingUp />
                             Sales
                         </SidebarListItem>
                     </SidebarList>
@@ -116,23 +76,19 @@ const SlideBar = () => {
                     <SidebarTitle>All Menu</SidebarTitle>
                     <SidebarList>
                         
-                            <SidebarListItem>
-                                <MyPermIdentity />
-                                <Link to="/user">Users</Link>
-                            </SidebarListItem>
-                      
-                            <SidebarListItem>
-                                <MyStorefront />
-                                <Link to="/products">Products</Link>
-                            </SidebarListItem>
-                     
                         <SidebarListItem>
-                            <MyAssessment />
-                            Reports
+                            <PermIdentity />
+                            <Link to="/user">Users</Link>
                         </SidebarListItem>
+                    
                         <SidebarListItem>
-                            <MyLocalAtm />
-                            Transactions
+                            <Storefront />
+                            <Link to="/products">Products</Link>
+                        </SidebarListItem>
+
+                        <SidebarListItem>
+                            <LocalAtm />
+                            Orders
                         </SidebarListItem>
                     </SidebarList>
                 </SidebarMenu>
@@ -140,36 +96,19 @@ const SlideBar = () => {
                     <SidebarTitle>Connect</SidebarTitle>
                     <SidebarList>
                         <SidebarListItem>
-                            <MyDrafts />
+                            <Drafts />
                             Mail
                         </SidebarListItem>
                         <SidebarListItem>
-                            <MyFeedback />
+                            <Feedback />
                             Feedback
                         </SidebarListItem>
                         <SidebarListItem>
-                            <MyForum />
+                            <Forum />
                             Messages
                         </SidebarListItem>
                     </SidebarList>
-                </SidebarMenu>
-                <SidebarMenu>
-                    <SidebarTitle>Employees</SidebarTitle>
-                    <SidebarList>
-                        <SidebarListItem>
-                            <MyWork />
-                            Manage
-                        </SidebarListItem>
-                        <SidebarListItem>
-                            <MyPieChart />
-                            Analytics
-                        </SidebarListItem>
-                        <SidebarListItem>
-                            <MyReceipt />
-                            Reports
-                        </SidebarListItem>
-                    </SidebarList>
-                </SidebarMenu>
+                </SidebarMenu>                   
             </SidebarWrapper>
         </SidebarContainer>
     )
