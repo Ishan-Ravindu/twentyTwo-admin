@@ -1,17 +1,4 @@
-import { useEffect } from 'react';
 import styled from 'styled-components'
-import ReactDOM from 'react-dom'
-
-const BackDrop = styled.div`
-    opacity: ${p => p.isOpen ? "100%" : "0%"};
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background-color: rgba(0,0,0,0.3);
-    transition: right 0.5s ease-in-out;
-`
 
 const Container = styled.div`
     position: fixed;
@@ -30,20 +17,11 @@ const Container = styled.div`
 `
 
 function Modal({children, isOpen, }) { 
-
-  useEffect(() => { //to prevent body scrolling while modal is open
-    if(isOpen) document.body.style.overflow = 'hidden';
-    if(!isOpen) document.body.style.overflow = 'unset';
-  }, [isOpen]);
-
-  return ReactDOM.createPortal(
-    <>
-      {isOpen && <BackDrop/>}
-      <Container isOpen={isOpen}>
-          {children}
-      </Container>
-    </>
-  ,document.getElementById("modal-root"))
+  return (
+    <Container isOpen={isOpen}>
+        {children}
+    </Container>
+  )
 }
 
 export default Modal

@@ -1,20 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React, { Children } from 'react'
 import styled from 'styled-components'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import { useEffect } from 'react';
 
-
-const BackDrop = styled.div`
-    opacity: ${p => p.isOpen ? "100%" : "0%"};
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background-color: rgba(0,0,0,0.3);
-    transition: right 0.5s ease-in-out;
-`
 
 const Container = styled.div`
     z-index: 51;
@@ -24,6 +11,7 @@ const Container = styled.div`
     width: 50vw;
     height: 100vh;
     background-color: white;  
+    box-shadow: 0 0px 0px ${p => p.isOpen ? "100000px" : "0px"} rgba(0,0,0,.3);
     transition: right 0.5s ease-in-out;
     @media (max-width: 800px) {
         width: 100vw;
@@ -135,33 +123,23 @@ const SubmitBtn = styled.button`
 
 
 function EditModal({children, isOpen, setIsOpen, title, desc}) {
-
-    useEffect(() => { //to prevent body scrolling while modal is open
-        if(isOpen) document.body.style.overflow = 'hidden';
-        if(!isOpen) document.body.style.overflow = 'scroll';
-     }, [isOpen]);
-
-  return ReactDOM.createPortal(
-    <>
-        {isOpen && <BackDrop isOpen={isOpen}/> }
-        <Container isOpen={isOpen}>
-            <Top>
-                    <h3>{title}</h3>
-                    <p>{desc}</p>
-                    <div onClick={() => setIsOpen(false)}><CloseOutlinedIcon/></div>           
-            </Top>
-            <Middle>
-                {children}
-            </Middle>
-            <Bottom>
-                <CancelBtn>Cancel</CancelBtn>
-                <SubmitBtn>{title}</SubmitBtn>
-            </Bottom>
-            
-        </Container>
+  return (
+    <Container isOpen={isOpen}>
+        <Top>
+                <h3>{title}</h3>
+                <p>{desc}</p>
+                <div onClick={() => setIsOpen(false)}><CloseOutlinedIcon/></div>           
+        </Top>
+        <Middle>
+            {children}
+        </Middle>
+        <Bottom>
+            <CancelBtn>Cancel</CancelBtn>
+            <SubmitBtn>{title}</SubmitBtn>
+        </Bottom>
         
-    </>
-  , document.getElementById("editModal-root"))
+    </Container>
+  )
 }
 
 export default EditModal
