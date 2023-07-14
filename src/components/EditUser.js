@@ -87,6 +87,7 @@ function EditUser({isOpen, setIsOpen, EditUserInfo, title, desc, action}) {
 
     if(!EditUserInfo) return
     const {resetPasswordExpire,createdAt,_id , ...others} = User;
+
     await updateUser(dispatch, User._id, others)
     
     setIsOpen(false)

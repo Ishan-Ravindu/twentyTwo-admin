@@ -44,10 +44,7 @@ const FilterSection = styled.div`
         padding: 1rem 0.8rem; 
     }
 
-    > input:focus {
-        background-color: white;
-    }
-    > select:focus {
+    > *:focus {
         background-color: white;
     }
 `
