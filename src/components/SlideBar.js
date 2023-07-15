@@ -1,6 +1,7 @@
 import React from 'react'
-import { LineStyle, Timeline, TrendingUp, PermIdentity, Storefront, LocalAtm, Drafts, Feedback, Forum, PieChart } from "@material-ui/icons";
+import { LineStyle, Timeline, TrendingUp, PermIdentity, Storefront, LocalAtm, Drafts, Feedback, Forum } from "@material-ui/icons";
 import styled, { css } from "styled-components";
+import CampaignIcon from '@mui/icons-material/Campaign';
 import { Link} from 'react-router-dom';
 
 
@@ -56,16 +57,19 @@ const SlideBar = (props) => {
                 <SidebarMenu>
                     <SidebarTitle>Dashboard</SidebarTitle>
                     <SidebarList>
-                  
+                        <Link to="/">
                             <SidebarListItem>
                                 <LineStyle />
-                                <Link to="/">Home</Link>
+                                Home
                             </SidebarListItem>
-                  
-                        <SidebarListItem>
-                            <PieChart />
-                            Analytics
-                        </SidebarListItem>
+                        </Link>
+                        
+                        <Link to="announcment">
+                            <SidebarListItem>
+                                <CampaignIcon />
+                                Annoucment
+                            </SidebarListItem>
+                        </Link>
                         <SidebarListItem>
                             <TrendingUp />
                             Sales
@@ -76,21 +80,27 @@ const SlideBar = (props) => {
                     <SidebarTitle>All Menu</SidebarTitle>
                     <SidebarList>
                         
-                        <SidebarListItem>
+                        <Link to="/user">
+                            <SidebarListItem>
                             <PermIdentity />
-                            <Link to="/user">Users</Link>
-                        </SidebarListItem>
-                    
-                        <SidebarListItem>
-                            <Storefront />
-                            <Link to="/products">Products</Link>
-                        </SidebarListItem>
+                                Users
+                            </SidebarListItem>
+                        </Link>
+                        <Link to="/products">
+                            <SidebarListItem>
+                                <Storefront />
+                                Products
+                            </SidebarListItem>
+                        </Link>
 
-                        <SidebarListItem>
-                            <LocalAtm />
-                            <Link to="/orders">Orders</Link>
-                        </SidebarListItem>
+                        <Link to="/orders">
+                            <SidebarListItem>
+                                <LocalAtm />
+                                Orders
+                            </SidebarListItem>
+                        </Link>
                     </SidebarList>
+
                 </SidebarMenu>
                 <SidebarMenu>
                     <SidebarTitle>Connect</SidebarTitle>
